@@ -64,11 +64,11 @@ The next steps are taken in part from this [blog post](https://discourse.ros.org
 ros2 run micro_ros_setup create_firmware_ws.sh freertos esp32
 
 # Git clone this repository into 'microros_ws/firmware/freertos_apps/apps' directory   
-git clone https://github.com/albertrichard080/ros_esp32cam_diffdrive firmware/freertos_apps/apps/ros_esp32cam_diffdrive
+git clone https://github.com/albertrichard080/ros2_esp32-microros.git
 
 # Configure the firmware by setting the ip address of the PC you run the micro-ROS Agent on. 
 # (In most cases, this is the PC you are working on right now. Run 'ifconfig' in terminal to find out your ip address.) 
-ros2 run micro_ros_setup configure_firmware.sh ros_esp32cam_diffdrive -t udp -i [agent ip address] -p 8888
+ros2 run micro_ros_setup configure_firmware.sh ros2_esp32-microros -t udp -i [agent ip address] -p 8888
 # Configure more settings
 ros2 run micro_ros_setup build_firmware.sh menuconfig
 # Navigate to 'micro-ROS Transport Settings' / 'WiFi Configuration' menu and enter your WiFi SSID and password. Save your changes and exit the interactive menu.
