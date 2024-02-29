@@ -1,10 +1,10 @@
 # ros-esp32cam-diffdrive
 
-This is a ROS 2 & micro-ROS project to control an RC tank with differential drive (skid steering) with an ESP32-CAM module. 
-I'm using an XBox 360 gamepad connected to a PC running *Ubuntu 20.04* and [ROS 2 Foxy](https://docs.ros.org/en/foxy/index.html) as teleoperation input. 
-This data is then sent via Wi-Fi to an ESP32-CAM microcontroller running [micro-ROS](https://micro.ros.org/) which transforms the input to PWM signals controlling the 2 motors.
+This is a ROS 2 & micro-ROS project to control an RC tank with differential drive (skid steering) with an ESP32-module. 
+I'm using an XBox 360 gamepad connected to a PC running *Ubuntu 20.04* and [ROS 2 Foxy](https://docs.ros.org/en/humble/index.html) as teleoperation input. 
+This data is then sent via Wi-Fi to an ESP32-microcontroller running [micro-ROS](https://micro.ros.org/) which transforms the input to PWM signals controlling the 2 motors.
 
-At a later stage, the video of the ESP32-CAM module should be sent back to ROS 2 for further processing or display.
+At a later stage, the video of the ESP32-module should be sent back to ROS 2 for further processing or display.
 
 **Note: This is work in progress and doesn't include all features yet. I retested the software and its installation in June 2023 and can confirm that it still works. 
 However, it will probably fail on more recent versions of Ubuntu and ROS2, since the developers now recommend using a [micro-ROS component for ESP-IDF](https://github.com/micro-ROS/micro_ros_espidf_component) on the [micro-ROS *iron* branch](https://github.com/micro-ROS/micro_ros_setup/tree/iron) instead.**
@@ -14,14 +14,14 @@ However, it will probably fail on more recent versions of Ubuntu and ROS2, since
 The first few steps are taken directly from the [micro-ROS Tutorials](https://micro.ros.org/docs/tutorials/core/first_application_linux/). 
 (If the instructions depicted here don't work anymore, view the original tutorials for updates and maybe drop me a note.)
 
-Install **ROS 2 Foxy FitzRoy** on your Ubuntu 20.04 LTS computer. I recommend installation via Debian packages, as instructed 
-[here](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html).
+Install **ROS 2 Humble Hawksbill** on your Ubuntu 22.04 LTS computer or use the docker image of humble. I recommend installation via Debian packages, as instructed 
+[here](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html).
 
 Once you have a ROS 2 installation in the computer, follow these steps to install the micro-ROS build system:
 
 ```bash
 # Source the ROS 2 installation, if you haven't added it to your .bashrc file.
-source /opt/ros/foxy/setup.bash
+source /opt/ros/humble/setup.bash
 
 # Create a workspace and download the micro-ROS tools
 mkdir microros_ws
@@ -64,7 +64,7 @@ The next steps are taken in part from this [blog post](https://discourse.ros.org
 ros2 run micro_ros_setup create_firmware_ws.sh freertos esp32
 
 # Git clone this repository into 'microros_ws/firmware/freertos_apps/apps' directory   
-git clone https://github.com/Reinbert/ros_esp32cam_diffdrive firmware/freertos_apps/apps/ros_esp32cam_diffdrive
+git clone https://github.com/albertrichard080/ros_esp32cam_diffdrive firmware/freertos_apps/apps/ros_esp32cam_diffdrive
 
 # Configure the firmware by setting the ip address of the PC you run the micro-ROS Agent on. 
 # (In most cases, this is the PC you are working on right now. Run 'ifconfig' in terminal to find out your ip address.) 
@@ -107,7 +107,7 @@ If you can't see it there either, make sure you set your wifi credentials correc
 Open a new terminal and run:
 ```bash
 # Source the ROS 2 installation, if you haven't added it to your .bashrc file.
-source /opt/ros/foxy/setup.bash
+source /opt/ros/humble/setup.bash
 
 # List all available topics
 ros2 topic list
@@ -124,7 +124,7 @@ ros2 topic info /cmd_vel -v
 At this point, the robot is ready to be controlled with a teleop node. Open a new terminal and run:
 ```bash
 # Source the ROS 2 installation, if you haven't added it to your .bashrc file.
-source /opt/ros/foxy/setup.bash
+source /opt/ros/humble/setup.bash
 
 # Launch a keyboard tele operation node
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
